@@ -47,7 +47,7 @@
                                                     name="username"
                                                     type="text"
                                                     placeholder="Masukkan Username"/>
-                                                @if ($errors->has('username'))
+                                                @if($errors->has('username'))
                                                 <span class="error">{{ $errors->first('username') }}</span>
                                                 @endif
                                             </div>
@@ -59,7 +59,7 @@
                                                     type="password"
                                                     name="password"
                                                     placeholder="Masukkan Password"/>
-                                                @if ($errors->has('password'))
+                                                @if($errors->has('password'))
                                                 <span class="error">{{ $errors->first('password') }}</span>
                                                 @endif
                                             </div>

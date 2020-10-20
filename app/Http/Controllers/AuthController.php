@@ -25,7 +25,13 @@ class AuthController extends Controller
 
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('admin');
+            $user = Auth::user();
+            if ($user->level == 'admin') {
+                return redirect()->intended('admin');
+            } elseif ($user->level == 'editor') {
+                return redirect()->intended('editor');
+            }
+            return redirect('/');
         }
         return redirect('login')->withSuccess('Oppes! Silahkan Cek Inputanmu');
     }
