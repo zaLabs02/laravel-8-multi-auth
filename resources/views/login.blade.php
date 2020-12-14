@@ -40,6 +40,18 @@
                                         <form action="{{url('proses_login')}}" method="POST" id="logForm">
                                             {{ csrf_field() }}
                                             <div class="form-group">
+                                                @error('login_gagal')
+                                                    {{-- <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span> --}}
+                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                        {{-- <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span> --}}
+                                                        <span class="alert-inner--text"><strong>Warning!</strong> {{ $message }}</span>
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    @enderror
                                                 <label class="small mb-1" for="inputEmailAddress">Username</label>
                                                 <input
                                                     class="form-control py-4"
@@ -78,7 +90,7 @@
                                     </div>
                                     <div class="card-footer text-center">
                                         <div class="small">
-                                            <a href="{{url('register')}}">Belum Punya Akun? Daftar!</a>
+                                            {{-- <a href="{{url('register')}}">Belum Punya Akun? Daftar!</a> --}}
                                         </div>
                                     </div>
                                 </div>

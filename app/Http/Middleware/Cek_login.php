@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // baru
+use Illuminate\Support\Facades\Auth;
 
 class Cek_login
 {
@@ -15,17 +15,19 @@ class Cek_login
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next, $role)
     {
         if (!Auth::check()) {
             return redirect('login');
         }
+
         $user = Auth::user();
 
-        if($user->level == $roles)
+        if ($user->level == $role) {
             return $next($request);
+        }
 
-
-        return redirect('login')->with('error',"kamu gak punya akses");
+        return redirect('login')->with('error',"Kamu gak punya akses yaaa..");
+        //
     }
 }
