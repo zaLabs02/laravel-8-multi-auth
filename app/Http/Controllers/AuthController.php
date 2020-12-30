@@ -10,6 +10,12 @@ class AuthController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+        if ($user->level == 'admin') {
+            return redirect()->intended('admin');
+        } elseif ($user->level == 'editor') {
+            return redirect()->intended('editor');
+        }
         return view('login');
     }
 
