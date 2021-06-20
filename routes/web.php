@@ -30,3 +30,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('editor', AdminController::class);
     });
 });
+
+Route::group(['prefix' => 'pegawai'], function(){
+    Route::get('login', 'App\Http\Controllers\CustomTable\AuthController@index')->name('login_pegawai');
+    Route::post('proses_login', 'App\Http\Controllers\CustomTable\AuthController@proses_login')->name('proses_login_pegawai');
+    Route::group(['prefix' => 'dashboard', 'middleware' => ['auth:customtable']], function(){
+        Route::group(['middleware' => ['cek_login:QA']], function () {
+            Route::resource('QA', AdminController::class);
+        });
+        Route::group(['middleware' => ['cek_login:editor']], function () {
+            Route::resource('editor_pegawai', AdminController::class);
+        });
+    });
+});

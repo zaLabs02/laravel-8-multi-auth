@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pegawai;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -31,8 +32,28 @@ class AkunSeeder extends Seeder
             ],
         ];
 
+        $pegawai = [
+            [
+                'username' => 'editor',
+               'name'=>'ini akun Editor (pegawai)',
+               'email'=>'admin@example.com',
+                'level'=>'editor',
+               'password'=> bcrypt('123456'),
+            ],
+            [
+                'username' => 'QA',
+               'name'=>'ini akun QA (pegawai)',
+               'email'=>'user@example.com',
+                'level'=>'QA',
+               'password'=> bcrypt('123456'),
+            ],
+        ];
+
         foreach ($user as $key => $value) {
             User::create($value);
+        }
+        foreach ($pegawai as $key => $value) {
+            Pegawai::create($value);
         }
     }
 }

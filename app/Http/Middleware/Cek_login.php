@@ -17,6 +17,19 @@ class Cek_login
      */
     public function handle(Request $request, Closure $next, $role)
     {
+        $pgw = Auth::guard('customtable')->user();
+
+        if ($pgw->level == "QA" || $pgw->level == "editor") {
+            if (!Auth::guard('customtable')->check()) {
+                return redirect('login');
+            }
+            if ($pgw->level == $role) {
+                return $next($request);
+            }
+
+            return redirect()->route('login_pegawai')->with('error',"Kamu gak punya akses yaaa..");
+        }
+
         if (!Auth::check()) {
             return redirect('login');
         }
@@ -26,7 +39,6 @@ class Cek_login
         if ($user->level == $role) {
             return $next($request);
         }
-
         return redirect('login')->with('error',"Kamu gak punya akses yaaa..");
         //
     }

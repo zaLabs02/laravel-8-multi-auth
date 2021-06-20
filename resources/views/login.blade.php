@@ -34,10 +34,10 @@
                                     </div>
                                     @endif
                                     <div class="card-header">
-                                        <h3 class="text-center font-weight-light my-4">Login</h3>
+                                        <h3 class="text-center font-weight-light my-4">Login {{ Request::routeIs('login_pegawai') ? 'Pegawai' : '' }}</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{url('proses_login')}}" method="POST" id="logForm">
+                                        <form action="{{ Request::routeIs('login_pegawai') ? route('proses_login_pegawai') : route('proses_login') }}" method="POST" id="logForm">
                                             {{ csrf_field() }}
                                             <div class="form-group">
                                                 @error('login_gagal')
@@ -91,6 +91,7 @@
                                     <div class="card-footer text-center">
                                         <div class="small">
                                             {{-- <a href="{{url('register')}}">Belum Punya Akun? Daftar!</a> --}}
+                                            <a href="{{route('login_pegawai')}}">Anda sebagai pegawai? silahkan login ke halaman ini.</a>
                                         </div>
                                     </div>
                                 </div>
